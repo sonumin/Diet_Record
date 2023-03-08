@@ -166,8 +166,9 @@ const SettingScreen = () =>{
                         <Text style={styles.goalText}>키 : {userProfile['height']}  몸무게 : {userProfile['weight']}</Text>
                         <Text style={styles.goalText}></Text>
                         <Text style={styles.goalText}>목표 칼로리 : {userProfile['kcal']}</Text>
-                        <Text style={styles.goalText}>목표 탄수화물 : {userProfile['carbo']}  목표지방 : {userProfile['province']}</Text>
+                        <Text style={styles.goalText}>목표 탄수화물 : {userProfile['carbo']}</Text>
                         <Text style={styles.goalText}>목표 단백질 : {userProfile['protein']}</Text>
+                        <Text style={styles.goalText}>목표 지방 : {userProfile['fat']}</Text>
                     </View>
                 </View>
             </View>
@@ -209,7 +210,7 @@ const styles=StyleSheet.create({
     },
     profile:{
         width:'100%',
-        height:'50%',
+        height:'40%',
         flexDirection:'row',
 
     },
@@ -248,7 +249,7 @@ const styles=StyleSheet.create({
     },
     goalContainer:{
         width:'100%',
-        height:'50%',
+        height:'60%',
         justifyContent:'space-around',
         padding:'5%'
     },

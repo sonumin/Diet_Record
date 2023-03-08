@@ -89,22 +89,11 @@ const DetailScreen = () =>{
             setVisible(true)
         })
         .catch((err) => {
-            
+            Alert.alert('이미지를 선택해 주세요.')
         });
     }
     const toHomeScreen = () =>{
         navigation.replace('Splash')
-    }
-    const postResult = async () =>{
-        await axios.post(`http://121.174.150.180:50001/save?id=${userID}`,JSON.stringify({
-            image_data: foodImg,
-            foodData: foodData
-        }),{
-        headers: {
-            'content-type': 'application/json',
-        },
-        responseType: 'json'
-        })
     }
     const saveResult = async () => {
         const queryClient = new QueryClient()
@@ -119,8 +108,13 @@ const DetailScreen = () =>{
             },
             responseType: 'json'
         })
-        queryClient.invalidateQueries()
-        toHomeScreen()
+        .then((res) => {
+            queryClient.invalidateQueries()
+            toHomeScreen()
+        })
+        .catch((err) => {
+            Alert.alert('이미지를 선택해 주세요.')
+        });
     }
     const showFoodList = () =>{
         
