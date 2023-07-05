@@ -170,7 +170,7 @@ export default SignInScreen;
 const styles=StyleSheet.create({
     screen:{
         flex:1,
-        backgroundColor:'white'
+        backgroundColor:'#15161E'
     },
     SectionStyle: {
         flexDirection: 'row',
@@ -219,7 +219,7 @@ const styles=StyleSheet.create({
     },
     inputStyle: {
         flex: 1,
-        color: 'black',
+        color: '#F3F2F4',
         paddingLeft: 15,
         paddingRight: 15,
         borderWidth: 1,

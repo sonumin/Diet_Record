@@ -17,6 +17,16 @@ LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 const {width,height} = Dimensions.get('window')
 const SettingScreen = () =>{
+    const [name, setName] = useState();
+    const [age, setAge] = useState();
+    const [height, setHeight] = useState();
+    const [weight, setWeight] = useState();
+    const [kcal, setKcal] = useState();
+    const [carbo, setCarbo] = useState();
+    const [protein, setProtein] = useState();
+    const [fat, setFat] = useState();
+    const [selectedGender, setSelectedGender] = useState('');
+    const [selectedActivity, setSelectedActivity] = useState('');
 
     const {userID, setValue} = useContext(AppContext)
     const [ID, setID] = useState();
@@ -33,22 +43,36 @@ const SettingScreen = () =>{
     const [profileImg, setProfileImg] = useState('/Users/jongsik2/Desktop/RN/RN_food_google_last/egg-bread.png');
     const [nineImages, setNineImages] = useState();
     const imgArray = []
-    const imagesData = useQuery(['9Image'], async () => {
-        return await axios.get(`http://121.174.150.180:50001/load9Images/${userID}`,{
-            // query URL without using browser cache
-            headers: {
-                'Cache-Control': 'no-cache',
-            },
-        })
-        .then((res)=> res.data)
-    },
-    {
-        onSuccess: (data) =>{
-            divideImages(data)
-        },
-    });
+    // const imagesData = useQuery(['9Image'], async () => {
+    //     return await axios.get(`http://1.176.185.164:5000/load9Images/${userID}`,{
+    //         // query URL without using browser cache
+    //         headers: {
+    //             // 'Cache-Control': 'no-cache',
+    //         },
+    //     })
+    //     .then((res)=> res.data)
+    // },
+    // {
+    //     onSuccess: (data) =>{
+    //         divideImages(data)
+    //     },
+    // });
+    const divide = (data) => {
+        // console.log(data.carbo)
+        setName(data.name)
+        setAge(data.age)
+        setHeight(data.height)
+        setWeight(data.weight)
+        setSelectedGender(data.sex)
+        setSelectedActivity(data.activity)
+        setKcal(data.kcal)
+        setCarbo(data.carbo)
+        setProtein(data.protein)
+        setFat(data.fat)
+    };
+
     const userData = useQuery(['userData'], async () => { 
-        return await axios.get(`http://121.174.150.180:50001/userData2/${userID}`,{
+        return await axios.get(`http://1.176.185.164:5000/userData2/${userID}`,{
             // query URL without using browser cache
             headers: {
                 'Cache-Control': 'no-cache',
@@ -58,9 +82,10 @@ const SettingScreen = () =>{
     },
     {
         onSuccess: (data) =>{
-            setUserProfile(data)
+            divide(data)
         },
     });
+    
     const divideImages = (data) =>{
         for(let i = 0; i < 9; i++){
             imgArray[i] = data[i]['image_data']
@@ -159,23 +184,23 @@ const SettingScreen = () =>{
                                     <Icon name="exit-outline" size={24} color="#000000" />
                                 </TouchableOpacity>
                             </View>    
-                            <Text style={styles.userLable}>안녕하세요 {userProfile['name']}님!</Text>
+                            <Text style={styles.userLable}>안녕하세요 {name}님!</Text>
                         </View>
                     </View>
                     <View style={styles.goalContainer}>
-                        <Text style={styles.goalText}>키 : {userProfile['height']}  몸무게 : {userProfile['weight']}</Text>
+                        <Text style={styles.goalText}>키 : {height}  몸무게 : {weight}</Text>
                         <Text style={styles.goalText}></Text>
-                        <Text style={styles.goalText}>목표 칼로리 : {userProfile['kcal']}</Text>
-                        <Text style={styles.goalText}>목표 탄수화물 : {userProfile['carbo']}</Text>
-                        <Text style={styles.goalText}>목표 단백질 : {userProfile['protein']}</Text>
-                        <Text style={styles.goalText}>목표 지방 : {userProfile['fat']}</Text>
+                        <Text style={styles.goalText}>목표 칼로리 : {kcal}</Text>
+                        <Text style={styles.goalText}>목표 탄수화물 : {carbo}</Text>
+                        <Text style={styles.goalText}>목표 단백질 : {protein}</Text>
+                        <Text style={styles.goalText}>목표 지방 : {fat}</Text>
                     </View>
                 </View>
             </View>
-            <View style={styles.history}>
+            {/* <View style={styles.history}>
                 <Text style={{fontSize:22}}>History</Text>
-            </View>
-            <NineImages/>
+            </View> */}
+            {/* <NineImages/> */}
         </View>
     )
 }

@@ -29,7 +29,7 @@ const LoginScreen = () =>{
     const {userID, setValue} = useContext(AppContext)
 
     const checkGoogle = async (user) =>{
-        const google = await axios.get(`http://121.174.150.180:50001/checkGoogle/${user}`,{
+        const google = await axios.get(`http://1.176.185.164:5000/checkGoogle/${user}`,{
             headers: {
                 'Cache-Control': 'no-cache',
             },
@@ -166,7 +166,7 @@ const LoginScreen = () =>{
 const styles=StyleSheet.create({
     screen:{
         flex:1,
-        backgroundColor:'white'
+        backgroundColor:'#15161E',
     },
     SectionStyle: {
         flexDirection: 'row',
@@ -215,7 +215,7 @@ const styles=StyleSheet.create({
     },
     inputStyle: {
         flex: 1,
-        color: 'black',
+        color: 'white',
         paddingLeft: 15,
         paddingRight: 15,
         borderWidth: 1,
@@ -224,7 +224,7 @@ const styles=StyleSheet.create({
         width:'88%'
     },
     registerTextStyle: {
-        color: '#000000',
+        color: '#ECEBF2',
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 14,

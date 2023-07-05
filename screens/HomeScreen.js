@@ -37,7 +37,7 @@ const HomeScreen = () =>{
     }
 
     const weekDat = useQuery(['weekData'], async () =>{
-        return await axios.get(`http://121.174.150.180:50001/weekData2/${userID}`,{
+        return await axios.get(`http://1.176.185.164:5000/weekData2/${userID}`,{
             // query URL without using browser cache
             headers: {
                 'Cache-Control': 'no-cache',
@@ -46,6 +46,8 @@ const HomeScreen = () =>{
     },
     {
         onSuccess: (data) =>{
+            console.log(1, data)
+
             convertWeek(data)
             setWeekData(weekArray);
         }
@@ -53,7 +55,7 @@ const HomeScreen = () =>{
     );
 
     const userData = useQuery(['userData'], async () =>{
-        return await axios.get(`http://121.174.150.180:50001/userData2/${userID}`,{
+        return await axios.get(`http://1.176.185.164:5000/userData2/${userID}`,{
             // query URL without using browser cache
             headers: {
                 'Cache-Control': 'no-cache',
@@ -62,12 +64,13 @@ const HomeScreen = () =>{
     },
     {
         onSuccess: (data) =>{
+            console.log(2, data)
 
         },
     }
     );
     const persentDat = useQuery(['persentData'], async () =>{
-        return await axios.get(`http://121.174.150.180:50001/persentData/${userID}`,{
+        return await axios.get(`http://1.176.185.164:5000/persentData/${userID}`,{
             // query URL without using browser cache
             headers: {
                 'Cache-Control': 'no-cache',
@@ -76,9 +79,10 @@ const HomeScreen = () =>{
     },
     {
         onSuccess: (data) =>{
+            console.log(3, data)
             setPersentData(data[0])
-            // convertPersent(data)
-            // setPersentData(persentArray)
+            convertPersent(data)
+            setPersentData(persentArray)
         },
     }
     );
@@ -173,7 +177,7 @@ const HomeScreen = () =>{
                     </View>
                     <View style={styles.goalContainer}>
                         <View style={styles.goalTextContainer}>
-                            <Text style={{fontSize:25}}>   Today Eat Province</Text>  
+                            <Text style={{fontSize:25}}>   Today Eat Fat</Text>  
                         </View>   
                         <View style={styles.goalProgressContainer}>
                             <ProgressChart
